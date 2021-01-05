@@ -1,0 +1,540 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Richard's Very Bad Terrible No Good Morning</title>
+    <script src="scripts/three.js"></script>
+    <script src="scripts/GLTFLoader.js"></script>
+
+    <script>
+
+        "use strict";
+
+        var canvas, mini, renderer, scene, camera, topCamera, miniMapRenderer; // Standard three.js requirements.
+        
+        var trajectoryRay = new THREE.Raycaster(); // a ray will be cast in the direction of movement. If it intersects an object, that's a collision.
+        var colliders = new THREE.Group(); // all environment objects in the scene
+
+        var character = new THREE.Object3D(); // Will be used to store Richard and the cameras that follow him around (since he's so cool).
+        var position = character.position; // Will be used to keep track of the character's position after each button press.
+        var distanceBetween = new THREE.Vector3(); // Will be used to keep track of the distance between Richard and his target/goal.
+
+        var destination3 = new THREE.Vector3(-38,0,65); // The area between MSB and MSL.
+        var level = 3; // Set to the first level of the game and update where appropriate.
+        var manager = new THREE.LoadingManager(); 
+
+        var animating = false;  // Set to true when an animation is in progress.
+        var frameNumber = 0;  // Frame number is advanced by 1 for each frame while animating.
+
+        var posX = 0; // Will be used for rotating Richard while he's moving.
+        var posZ = Math.PI/2; // Will be used for rotating Richard while he's moving.
+
+        var backGroundMusic; // Will be used for all the background music used in the game.
+        var jump = false, down = 0, up = 0;
+        var jumpAction, idleAction, mixer; // Will be used to animate Richard's movements.
+
+        var target = new THREE.Object3D(); // Need to make it an Object3D so that we can make it rotate on its own axis.
+        var ambient= new THREE.AmbientLight(0x404040,1 );
+        var mouse = new THREE.Vector2(0,0);
+        var prevMouse = new THREE.Vector2(0,0);
+        var targetCamera = new THREE.Vector3();
+        var conditionX = false;
+        var conditionY= false;
+
+        // defines actions for all the manager's events
+        manager.onStart = function ( url, itemsLoaded, itemsTotal ) {
+            console.log( 'Started loading file: ' + url + '.\nLoaded ' + itemsLoaded + ' of ' + itemsTotal + ' files.' );
+        };
+        manager.onLoad = function ( ) {
+            console.log( 'Loading complete!');
+            trajectoryRay.far = 0.1;
+            requestAnimationFrame( render );
+            render;
+            document.getElementById('start').enabled = true;
+        };
+        manager.onProgress = function ( url, itemsLoaded, itemsTotal ) {
+            console.log( 'Loading file: ' + url + '.\nLoaded ' + itemsLoaded + ' of ' + itemsTotal + ' files.' );
+        };
+        manager.onError = function ( url ) {
+            console.log( 'There was an error loading ' + url );
+        };
+
+        /**
+         *  The render function draws the scene.
+         */
+
+        function render() {
+            if(conditionX){
+                targetCamera.y = ( 1 - mouse.y ) * 0.001;
+                targetCamera.z=position.z;
+                camera.rotateX( 0.025 * ( targetCamera.y));
+                conditionX = false;
+            }
+            if(conditionY){
+                targetCamera.x = ( 1 - mouse.x ) * 0.001;
+                targetCamera.z=position.z;
+                camera.rotateY(0.025 * ( targetCamera.x));
+                conditionY = false;
+            }
+            renderer.render(scene, camera);
+            miniMapRenderer.render(scene, topCamera);
+        }
+
+
+        function sound(src) { // Used to add audio and background music into the game.
+            this.sound = document.createElement("audio");
+            this.sound.src = src;
+            this.sound.setAttribute("preload", "auto");
+            this.sound.setAttribute("controls", "none");
+            this.sound.style.display = "none";
+            document.body.appendChild(this.sound);
+            this.play = function(){
+                this.sound.play();
+            };
+            this.stop = function(){
+                this.sound.pause();
+            }
+        }
+
+        function thirdLevel(){ // Will be the second state/level of the game. Update the positions of the camera and character as required.
+            document.getElementById('start').enabled = false;
+            backGroundMusic = new sound("./assets/music-and-video/Eye of the Tiger.mp3");
+
+            // ------------------- Make a camera with viewpoint light ----------------------
+
+            renderer.setClearColor("white"); // Background color for scene.
+            scene = new THREE.Scene();
+
+            // Camera that follows the character
+            camera = new THREE.PerspectiveCamera(45, (window.innerWidth - 30)/(window.innerHeight - 250), 0.11, 200);
+            scene.add(ambient);
+            scene.add(new THREE.DirectionalLight(0xffffff,0.5));; // Dim light shining from above.
+
+            // Camera for the minimap (bird's eye view)
+            topCamera = new THREE.PerspectiveCamera(55, (window.innerWidth - 30)/(window.innerHeight - 250), 0.1, 1000);
+            topCamera.position.set(-28,50,-55);
+            topCamera.lookAt(-28,0,-55);
+
+
+            // Put the WSS (or a close approximation ;) into the game.
+            const loader = new THREE.GLTFLoader(manager); // to load models
+            loader.load('./assets/environment-objects/scene.glb',function(gltf){
+                scene.add(gltf.scene);
+            });
+            //load colliders
+            loader.load('./assets/environment-objects/scene-colliders.glb',function(gltf){
+                gltf.scene.children.forEach((object)=>{
+                    object.material.side = THREE.DoubleSide
+                    object.material.flatShading =  true
+                })
+                colliders.add(gltf.scene);
+                colliders.visible = false;
+                scene.add(colliders);
+            });
+
+            // Make skybox Background
+            scene.background = new THREE.CubeTextureLoader().setPath('assets/skybox/level3/').load([
+                'posx.png',
+                'negx.png',
+                'posy.png',
+                'negy.png',
+                'posz.png',
+                'negz.png'
+            ]);
+
+            // Put Richard into the game.
+            loader.load('./assets/characters/2richard2curious.glb',function(gltf){
+                mixer = new THREE.AnimationMixer(gltf.scene);
+                idleAction = mixer.clipAction(gltf.animations[0]);
+                jumpAction =  mixer.clipAction(gltf.animations[1]);
+
+                gltf.scene.scale.set(0.1,0.1,0.1);
+                gltf.scene.rotation.set(0,Math.PI,0);
+
+                character.add(gltf.scene);
+                character.rotation.set(0,Math.PI,0);
+                character.position.set(-28,0,-55);
+                camera.position.set(0,3,8);
+                topCamera.position.set(0,5,0);
+                character.add(camera);
+                character.add(topCamera);
+
+                idleAction.play(); // Animate Richard
+                scene.add(character);
+            });
+
+            // Put the target (red Coke Zero can) into the game.
+            loader.load('./assets/environment-objects/coca-cola-bottle(3).glb',function(gltf){
+                target = gltf.scene;
+                target.rotation.set(0,0,Math.PI/8);
+                target.position.set(-38,2,65);
+                scene.add(target);
+            });
+        }
+
+        /**
+         *  This function is called once for each frame of the animation, before
+         *  the render() function is called for that frame.  It updates any
+         *  animated properties.  The value of the global variable frameNumber
+         *  is incrementd 1 before this function is called.
+         */
+
+        function updateForFrame() {
+            target.rotation.y += 0.05;
+        }
+
+        // ------------------- Initialise the timer and set it to the appropriate length ----------------------
+
+        function CountDownTimer(duration, granularity) {
+            this.duration = duration;
+            this.granularity = granularity || 1000;
+            this.tickFtns = [];
+            this.running = false;
+        }
+
+        CountDownTimer.prototype.start = function() {
+            if (this.running) {
+                return;
+            }
+            this.running = true;
+            var start = Date.now(),
+                that = this,
+                diff, obj;
+
+            (function timer() {
+                diff = that.duration - (((Date.now() - start) / 1000) | 0);
+
+                if (diff > 0) {
+                    setTimeout(timer, that.granularity);
+                } else {
+                    diff = 0;
+                    that.running = false;
+                }
+
+                obj = CountDownTimer.parse(diff);
+                that.tickFtns.forEach(function(ftn) {
+                    ftn.call(this, obj.minutes, obj.seconds);
+                }, that);
+            }());
+        };
+
+        CountDownTimer.prototype.onTick = function(ftn) {
+            if (typeof ftn === 'function') {
+                this.tickFtns.push(ftn);
+            }
+            return this;
+        };
+
+        CountDownTimer.prototype.expired = function() {
+            return !this.running;
+        };
+
+        CountDownTimer.parse = function(seconds) {
+            return {
+                'minutes': (seconds / 60) | 0,
+                'seconds': (seconds % 60) | 0
+            };
+        };
+
+        // Update timer and timeObj to set the timer to the appropriate length.
+        window.onload = function(){
+            var display = document.querySelector('#time'),
+                timer = new CountDownTimer(235),
+                timeObj = CountDownTimer.parse(235);
+
+            format(timeObj.minutes, timeObj.seconds);
+            timer.onTick(format);
+            document.querySelector('button').addEventListener('click', function () {
+                timer.start();
+                animating = true;
+                if (animating) {
+                    requestAnimationFrame(doFrame);
+                }
+            });
+
+            function format(minutes, seconds) {
+                minutes = minutes < 10 ? "0" + minutes : minutes;
+                seconds = seconds < 10 ? "0" + seconds : seconds;
+                display.textContent = minutes + ':' + seconds;
+                //var run = document.getElementById("animateCheckbox").checked;
+                if (minutes== 0 && seconds == 0){
+                    if (confirm("Oh no! You were late for class, and now all the third years are going to fail! Do you want to restart?")) {
+                        location.reload()
+                    } else {
+                        location.assign("./assets/music-and-video/video.mp4");
+                    }
+                }
+            }
+            init();
+        };
+
+        //This function check for movement in the mouse. The Conditons makes sure the camera doesn't keep rotating if there isn't mouse movement
+        function onMouseMove( event ){
+	        mouse.x = ( event.clientX - (window.innerWidth/2) );
+	        mouse.y = ( event.clientY -(window.innerHeight/2) );
+            if(mouse.x != prevMouse.x){
+                conditionY = true;
+                prevMouse.x=mouse.x;
+            }
+            if(mouse.y != prevMouse.y){
+                conditionX = true;
+                prevMouse.y = mouse.y;
+            }
+        }
+        /**
+         *  This function is called responsible for all movement within the game. After a movement
+         *  is made the current position of the character is obtained and compared with the destination
+         *  position of that level. Once the character has gotten to that destination position (or not)
+         *  before the timer runs out, something relevant will happen.
+         *
+         */
+         var keymap = {};
+        function move(keymap){ // Will be used to move Richard.
+            if (keymap[' '] && up == 0){
+                    idleAction.stop();
+                    jump = !jump;
+                    jumpAction.reset();
+                }
+                if (down == 1){
+                    jumpAction.stop();
+                    character.position.y = 0
+                    idleAction.play();
+                }
+                mixer.update(0.1);
+                
+                var ghost = character.clone(); // moves ahead of the character to check for collision
+                ghost.visible = false;
+
+                if (jump){
+                    up++;
+                }
+                if (up == 15){
+                    jump = !jump;
+                    down = up;
+                    up = 0;
+                }
+                if (down > 0){
+                    down--;
+                }
+                    
+                if (keymap['w'] && keymap['d']){
+                    posZ += Math.PI/100;
+                    ghost.translateZ(Math.sin(posZ));
+                    ghost.rotateY(-Math.PI/100);
+                    trajectoryRay.set(ghost.position,new THREE.Vector3(1,0,1));
+                    if (trajectoryRay.intersectObjects(colliders.getObjectByName('Scene').children,true).length == 0){
+                        character.translateZ(Math.sin(posZ));
+                        character.rotateY(-Math.PI/100);
+                        if (jump){
+                            character.translateY(0.1);
+                        }
+                        if ( down > 0 ){
+                            character.translateY(-0.1);
+                        }
+                    }
+                }
+                else if (keymap['w'] && keymap['a']){
+                    posZ += Math.PI/100;
+                    ghost.translateZ(Math.sin(posZ));
+                    ghost.rotateY(Math.PI/100);
+                    trajectoryRay.set(ghost.position,new THREE.Vector3(1,0,1));
+                    if (trajectoryRay.intersectObjects(colliders.getObjectByName('Scene').children,true).length == 0){
+                        character.translateZ(Math.sin(posZ));
+                        character.rotateY(Math.PI/100);
+                        if (jump){
+                            character.translateY(0.1);
+                        }
+                        if ( down > 0 && character.position.y > 0 ){
+                            character.translateY(-0.1);
+                        }
+                    }
+                }
+                else if (keymap['s'] && keymap['d']){
+                    posZ -= Math.PI/100;
+                    ghost.translateZ(Math.sin(posZ));
+                    ghost.rotateY(-Math.PI/100);
+                    trajectoryRay.set(ghost.position,new THREE.Vector3(1,0,1));
+                    if (trajectoryRay.intersectObjects(colliders.getObjectByName('Scene').children,true).length == 0){
+                        character.translateZ(Math.sin(posZ));
+                        character.rotateY(-Math.PI/100);
+                        if (jump){
+                            character.translateY(0.1);
+                        }
+                        if ( down > 0 ){
+                            character.translateY(-0.1);
+                        }
+                    }
+                }
+                else if (keymap['s'] && keymap['a']){
+                    posZ -= Math.PI/100;
+                    ghost.translateZ(Math.sin(posZ));
+                    ghost.rotateY(Math.PI/100);
+                    trajectoryRay.set(ghost.position,new THREE.Vector3(1,0,1));
+                    if (trajectoryRay.intersectObjects(colliders.getObjectByName('Scene').children,true).length == 0){
+                        character.translateZ(Math.sin(posZ));
+                        character.rotateY(Math.PI/100);
+                        if (jump){
+                            character.translateY(0.1);
+                        }
+                        if ( down > 0 ){
+                            character.translateY(-0.1);
+                        }
+                    }
+                }
+                else if (keymap['w']){
+                    posZ += Math.PI/100;
+                    ghost.translateZ(-Math.sin(posZ));
+                    trajectoryRay.set(ghost.position,new THREE.Vector3(1,0,1));
+                    if (trajectoryRay.intersectObjects(colliders.getObjectByName('Scene').children,true).length == 0){
+                        character.translateZ(Math.sin(posZ));
+                        if (jump){
+                            character.translateY(0.1);
+                        }
+                        if ( down > 0 ){
+                            character.translateY(-0.1);
+                        }
+                    }
+                }
+                else if (keymap['s']){
+                    posZ += Math.PI/100;
+                    ghost.translateZ(Math.sin(posZ));
+                    trajectoryRay.set(ghost.position,new THREE.Vector3(1,0,1));
+                    if (trajectoryRay.intersectObjects(colliders.getObjectByName('Scene').children,true).length == 0){
+                        character.translateZ(-Math.sin(posZ));
+                        if (jump){
+                            character.translateY(0.1);
+                        }
+                        if ( down > 0 ){
+                            character.translateY(-0.1);
+                        }
+                    }
+                }
+                else if (keymap['a']){
+                    ghost.rotateY(Math.PI/100);
+                    trajectoryRay.set(ghost.position,new THREE.Vector3(1,0,1));
+                    if (trajectoryRay.intersectObjects(colliders.getObjectByName('Scene').children,true).length == 0){
+                        character.rotateY(Math.PI/100);
+                        if (jump){
+                            character.translateY(0.1);
+                        }
+                        if ( down > 0 ){
+                            character.translateY(-0.1);
+                        }
+                    }
+                }
+                else if (keymap['d']){
+                    character.rotateY(-Math.PI/100);
+                    trajectoryRay.set(ghost.position,new THREE.Vector3(1,0,1));
+                    if (trajectoryRay.intersectObjects(colliders.getObjectByName('Scene').children,true).length == 0){
+                        character.rotateY(-Math.PI/100);
+                        if (jump){
+                            character.translateY(0.1);
+                        }
+                        if ( down > 0 ){
+                            character.translateY(-0.1);
+                        }
+                    }
+                }
+
+                if(character.position.distanceToSquared(destination3) < 5){
+                    location.assign("./assets/music-and-video/klein_wars_outro.mp4");
+                }
+            }
+
+        /*  Drives the animation, called by system through requestAnimationFrame() */
+
+        function doFrame() {
+            if (animating) {
+                updateForFrame();
+                render();
+                requestAnimationFrame(doFrame);
+                backGroundMusic.play(); // Plays the music
+            }
+        }
+
+        /*----------------------------- INITIALIZATION ----------------------------------------
+        /**
+         *  This function is called by the onload event so it will run after the
+         *  page has loaded.  It creates the renderer, canvas, and scene objects,
+         *  calls createWorld() to add objects to the scene, and renders the
+         *  initial view of the scene.  If an error occurs, it is reported.
+         */
+        function init() {
+            try {
+                // Renderer for the main map (viewport1)
+                renderer = new THREE.WebGLRenderer({
+                    canvas: canvas,
+                    antialias: true,
+                    alpha: false
+                });
+                renderer.setSize(window.innerWidth - 30, window.innerHeight - 250);
+                renderer.shadowMap.enabled = true;
+                renderer.shadowMapSoft = true;
+                renderer.setClearColor("white");
+                document.getElementById('viewport1').appendChild(renderer.domElement);
+
+                // Renderer for the minimap (viewport2)
+                miniMapRenderer = new THREE.WebGLRenderer({
+                    canvas: mini,
+                    antialias: true,
+                    alpha: false
+                });
+                miniMapRenderer.setSize(window.innerWidth/5, window.innerHeight/5);
+                document.getElementById('viewport2').appendChild(miniMapRenderer.domElement);
+                window.addEventListener( 'mousemove', onMouseMove, false );
+            }
+            catch (e) {
+                document.getElementById("message").innerHTML="<b>Sorry, an error occurred:<br>" +
+                    e + "</b>";
+                return;
+            }
+            document.addEventListener("keydown", function(ev){keymap[ev.key] = ev.type == 'keydown';move(keymap);}, false);
+            document.addEventListener("keyup",function(ev){keymap[ev.key] = ev.type == 'keydown';move(keymap);}, false);
+            thirdLevel();
+            render();
+        }
+
+        function changeView(el) { // This will be used to change the view from first to second person.
+            if (el.value === "First Person" ){
+                el.value = "Third Person";
+                camera.translateZ(-9);
+                camera.translateY(-1);
+            }
+            else{
+                el.value = "First Person";
+                camera.translateZ(9);
+                camera.translateY(1);
+            }
+        }
+
+    </script>
+</head>
+
+<body>
+
+<h2>Richard's Very Bad Terrible No Good Morning</h2>
+
+
+
+<noscript>
+    <p style="color: #AA0000; font-weight: bold">Sorry, but this page requires JavaScript!</p>
+</noscript>
+
+<p style="color:#AA0000; font-weight: bold" id="message">
+</p>
+<p>
+    Richard has overslept and needs to collect all the essentials and get to the CGV lecture fast!	&#128564
+</p>
+<p>
+    <button id="start">Start Game</button>
+<div>Class starts in <span id="time"></span> but that bottle of sparkling water messed with your cognitive functions. Consequently, you can now only make sinusoidal movements. Go get that bottle of Coke Zero next to WSS to restore yourself to normal !!HURRY!</div>
+<input type="button" value="First Person" onclick="return changeView(this);" />
+</p>
+
+<div id="canvas-holder" style="float:left; border: thin solid black; background-color: white">
+    <div id="viewport1"></div>
+    <div id = "viewport2" style=" float: right; padding:0; margin: 0; height: 20%; bottom: 5px;
+    right: 1.5%; top: 74.5%; width: 20%; position: absolute"></div>
+</div>
+</body>
+</html>

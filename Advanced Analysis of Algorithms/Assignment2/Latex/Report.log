@@ -1,0 +1,233 @@
+This is pdfTeX, Version 3.14159265-2.6-1.40.21 (MiKTeX 20.10) (preloaded format=pdflatex 2020.10.22)  24 OCT 2020 20:47
+entering extended mode
+**./Report.tex
+(Report.tex
+LaTeX2e <2020-10-01> patch level 1
+L3 programming layer <2020-10-05> xparse <2020-03-03>
+(C:\Users\Philani\AppData\Local\Programs\MiKTeX\tex/latex/base\article.cls
+Document Class: article 2020/04/10 v1.4m Standard LaTeX document class
+(C:\Users\Philani\AppData\Local\Programs\MiKTeX\tex/latex/base\size10.clo
+File: size10.clo 2020/04/10 v1.4m Standard LaTeX file (size option)
+)
+\c@part=\count175
+\c@section=\count176
+\c@subsection=\count177
+\c@subsubsection=\count178
+\c@paragraph=\count179
+\c@subparagraph=\count180
+\c@figure=\count181
+\c@table=\count182
+\abovecaptionskip=\skip47
+\belowcaptionskip=\skip48
+\bibindent=\dimen138
+)
+(C:\Users\Philani\AppData\Local\Programs\MiKTeX\tex/latex/graphics\graphicx.sty
+Package: graphicx 2020/09/09 v1.2b Enhanced LaTeX Graphics (DPC,SPQR)
+(C:\Users\Philani\AppData\Local\Programs\MiKTeX\tex/latex/graphics\keyval.sty
+Package: keyval 2014/10/28 v1.15 key=value parser (DPC)
+\KV@toks@=\toks15
+)
+(C:\Users\Philani\AppData\Local\Programs\MiKTeX\tex/latex/graphics\graphics.sty
+Package: graphics 2020/08/30 v1.4c Standard LaTeX Graphics (DPC,SPQR)
+(C:\Users\Philani\AppData\Local\Programs\MiKTeX\tex/latex/graphics\trig.sty
+Package: trig 2016/01/03 v1.10 sin cos tan (DPC)
+)
+(C:\Users\Philani\AppData\Local\Programs\MiKTeX\tex/latex/graphics-cfg\graphics
+.cfg
+File: graphics.cfg 2016/06/04 v1.11 sample graphics configuration
+)
+Package graphics Info: Driver file: pdftex.def on input line 105.
+
+(C:\Users\Philani\AppData\Local\Programs\MiKTeX\tex/latex/graphics-def\pdftex.d
+ef
+File: pdftex.def 2020/10/05 v1.2a Graphics/color driver for pdftex
+))
+\Gin@req@height=\dimen139
+\Gin@req@width=\dimen140
+)
+(C:\Users\Philani\AppData\Local\Programs\MiKTeX\tex/generic/babel\babel.sty
+Package: babel 2020/10/06 3.50 The Babel package
+
+(C:\Users\Philani\AppData\Local\Programs\MiKTeX\tex/generic/babel\babel.def
+File: babel.def 2020/10/06 3.50 Babel common definitions
+\babel@savecnt=\count183
+\U@D=\dimen141
+\l@babelnohyphens=\language79
+
+(C:\Users\Philani\AppData\Local\Programs\MiKTeX\tex/generic/babel\txtbabel.def)
+\bbl@readstream=\read2
+)
+\bbl@dirlevel=\count184
+
+*************************************
+* Local config file bblopts.cfg used
+*
+(C:\Users\Philani\AppData\Local\Programs\MiKTeX\tex/latex/arabi\bblopts.cfg
+File: bblopts.cfg 2005/09/08 v0.1 add Arabic and Farsi to "declared" options of
+ babel
+)
+Package babel Info: You haven't specified a language. I'll use 'nil'
+(babel)             as the main language. Reported on input line 1153.
+
+(C:\Users\Philani\AppData\Local\Programs\MiKTeX\tex/generic/babel\nil.ldf
+Language: nil 2020/10/06 3.50 Nil language
+\l@nil=\language80
+))
+(C:\Users\Philani\AppData\Local\Programs\MiKTeX\tex/latex/l3backend\l3backend-p
+dftex.def
+File: l3backend-pdftex.def 2020-09-24 L3 backend support: PDF output (pdfTeX)
+\l__kernel_color_stack_int=\count185
+\l__pdf_internal_box=\box47
+) (Report.aux)
+\openout1 = `Report.aux'.
+
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 20.
+LaTeX Font Info:    ... okay on input line 20.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 20.
+LaTeX Font Info:    ... okay on input line 20.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 20.
+LaTeX Font Info:    ... okay on input line 20.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 20.
+LaTeX Font Info:    ... okay on input line 20.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 20.
+LaTeX Font Info:    ... okay on input line 20.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 20.
+LaTeX Font Info:    ... okay on input line 20.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 20.
+LaTeX Font Info:    ... okay on input line 20.
+
+(C:\Users\Philani\AppData\Local\Programs\MiKTeX\tex/context/base/mkii\supp-pdf.
+mkii
+[Loading MPS to PDF converter (version 2006.09.02).]
+\scratchcounter=\count186
+\scratchdimen=\dimen142
+\scratchbox=\box48
+\nofMPsegments=\count187
+\nofMParguments=\count188
+\everyMPshowfont=\toks16
+\MPscratchCnt=\count189
+\MPscratchDim=\dimen143
+\MPnumerator=\count190
+\makeMPintoPDFobject=\count191
+\everyMPtoPDFconversion=\toks17
+)
+(C:\Users\Philani\AppData\Local\Programs\MiKTeX\tex/latex/epstopdf-pkg\epstopdf
+-base.sty
+Package: epstopdf-base 2020-01-24 v2.11 Base part for package epstopdf
+Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line 4
+85.
+)
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <12> on input line 22.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <8> on input line 22.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <6> on input line 22.
+ [1
+
+{C:/Users/Philani/AppData/Local/MiKTeX/pdftex/config/pdftex.map}]
+(Report.toc
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <7> on input line 4.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <5> on input line 4.
+)
+\tf@toc=\write3
+\openout3 = `Report.toc'.
+
+ [1]
+Overfull \hbox (0.66737pt too wide) in paragraph at lines 39--40
+\OT1/cmr/m/n/10 Our initial assumption is that the Backtracking Algorithm will 
+have the following
+ []
+
+[2]
+Overfull \hbox (2.08394pt too wide) in paragraph at lines 53--54
+\OT1/cmr/m/n/10 As stated in our aims, our initial assumption is that puzzles w
+ith more incomplete
+ []
+
+
+Overfull \hbox (2.71358pt too wide) in paragraph at lines 53--54
+\OT1/cmr/m/n/10 solution. We have utilized 4 metrics to measure the performance
+ of the algorithm,
+ []
+
+[3]
+Overfull \hbox (1.41733pt too wide) in paragraph at lines 71--75
+\OT1/cmr/m/n/10 expert) as the independent variable to measure the performance 
+of our algorithm.
+ []
+
+<Images//iteration1.png, id=27, 111.41624pt x 121.20282pt>
+File: Images//iteration1.png Graphic file (type png)
+<use Images//iteration1.png>
+Package pdftex.def Info: Images//iteration1.png  used on input line 83.
+(pdftex.def)             Requested size: 110.40253pt x 120.10027pt.
+<Images//iteration2.png, id=28, 106.89937pt x 119.69719pt>
+File: Images//iteration2.png Graphic file (type png)
+<use Images//iteration2.png>
+Package pdftex.def Info: Images//iteration2.png  used on input line 87.
+(pdftex.def)             Requested size: 110.40253pt x 123.62004pt.
+<Images//iteration3.png, id=29, 109.1578pt x 121.20282pt>
+File: Images//iteration3.png Graphic file (type png)
+<use Images//iteration3.png>
+Package pdftex.def Info: Images//iteration3.png  used on input line 91.
+(pdftex.def)             Requested size: 110.40253pt x 122.58586pt.
+[4 <./Images//iteration1.png> <./Images//iteration2.png> <./Images//iteration3.
+png>] [5]
+<Images//Comparisons.png, id=36, 1204.5pt x 803.0pt>
+File: Images//Comparisons.png Graphic file (type png)
+<use Images//Comparisons.png>
+Package pdftex.def Info: Images//Comparisons.png  used on input line 104.
+(pdftex.def)             Requested size: 258.75pt x 172.4946pt.
+<Images//Changes.png, id=38, 1204.5pt x 803.0pt>
+File: Images//Changes.png Graphic file (type png)
+<use Images//Changes.png>
+Package pdftex.def Info: Images//Changes.png  used on input line 110.
+(pdftex.def)             Requested size: 258.75pt x 172.4946pt.
+<Images//Recursions.png, id=39, 1204.5pt x 803.0pt>
+File: Images//Recursions.png Graphic file (type png)
+<use Images//Recursions.png>
+Package pdftex.def Info: Images//Recursions.png  used on input line 116.
+(pdftex.def)             Requested size: 258.75pt x 172.4946pt.
+<Images//Time.png, id=40, 1204.5pt x 803.0pt>
+File: Images//Time.png Graphic file (type png)
+<use Images//Time.png>
+Package pdftex.def Info: Images//Time.png  used on input line 122.
+(pdftex.def)             Requested size: 258.75pt x 172.4946pt.
+ [6 <./Images//Comparisons.png> <./Images//Changes.png>] [7 <./Images//Recursio
+ns.png> <./Images//Time.png>] [8
+
+] [9] (Report.bbl) [10] (Report.aux) ) 
+Here is how much of TeX's memory you used:
+ 1987 strings out of 480236
+ 30087 string characters out of 2879607
+ 315780 words of memory out of 3000000
+ 18550 multiletter control sequences out of 15000+200000
+ 539689 words of font info for 44 fonts, out of 3000000 for 9000
+ 1141 hyphenation exceptions out of 8191
+ 60i,7n,66p,772b,246s stack positions out of 5000i,500n,10000p,200000b,50000s
+<C:/Users/Philani/AppData/Local/Programs/
+MiKTeX/fonts/type1/public/amsfonts/cm/cmbx10.pfb><C:/Users/Philani/AppData/Loca
+l/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmbx12.pfb><C:/Users/Philani/A
+ppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi10.pfb><C:/User
+s/Philani/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi12.p
+fb><C:/Users/Philani/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/
+cm/cmmi7.pfb><C:/Users/Philani/AppData/Local/Programs/MiKTeX/fonts/type1/public
+/amsfonts/cm/cmmi8.pfb><C:/Users/Philani/AppData/Local/Programs/MiKTeX/fonts/ty
+pe1/public/amsfonts/cm/cmr10.pfb><C:/Users/Philani/AppData/Local/Programs/MiKTe
+X/fonts/type1/public/amsfonts/cm/cmr12.pfb><C:/Users/Philani/AppData/Local/Prog
+rams/MiKTeX/fonts/type1/public/amsfonts/cm/cmr17.pfb><C:/Users/Philani/AppData/
+Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr5.pfb><C:/Users/Philani
+/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr6.pfb><C:/User
+s/Philani/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr7.pfb
+><C:/Users/Philani/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm
+/cmr8.pfb><C:/Users/Philani/AppData/Local/Programs/MiKTeX/fonts/type1/public/am
+sfonts/cm/cmti10.pfb>
+Output written on Report.pdf (11 pages, 365459 bytes).
+PDF statistics:
+ 106 PDF objects out of 1000 (max. 8388607)
+ 0 named destinations out of 1000 (max. 500000)
+ 36 words of extra memory for PDF output out of 10000 (max. 10000000)
+

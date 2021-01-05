@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="5205fe70-8f21-4739-b963-eadc0490ddbe" name="Default Changelist" comment="" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="JavaScript File" />
+      </list>
+    </option>
+  </component>
+  <component name="ProjectId" id="1b1jroxoKPPnH0tiYzpAL6aLEav" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showExcludedFiles" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../../Software Design/Minimum Weighted Spanning Tree" />
+    <property name="run.code.analysis.last.selected.profile" value="pProject Default" />
+    <property name="settings.editor.selected.configurable" value="preferences.fileTypes" />
+  </component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\Philani\Documents\Wits University\YOS 3\Computer Graphics and Visualisation\Labs\Lab9\CS424, Fall 2015, Lab 9_files\resources" />
+      <recent name="C:\Users\Philani\Documents\Wits University\YOS 3\Computer Graphics and Visualisation\Labs\Lab9\CS424, Fall 2015, Lab 9_files" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\Philani\Documents\Wits University\YOS 3\Computer Graphics and Visualisation\Labs\Lab9\CS424, Fall 2015, Lab 9_files" />
+    </key>
+  </component>
+  <component name="RunManager" selected="JavaScript Debug.lab9.html">
+    <configuration name="lab9.html" type="JavascriptDebugType" temporary="true" nameIsGenerated="true" uri="http://localhost:63342/Lab9/CS424, Fall 2015, Lab 9_files/lab9.html" useBuiltInWebServerPort="true">
+      <method v="2" />
+    </configuration>
+    <configuration name="OrbitControls.js" type="NodeJSConfigurationType" temporary="true" nameIsGenerated="true" path-to-js-file="$PROJECT_DIR$/CS424, Fall 2015, Lab 9_files/OrbitControls.js" working-dir="$PROJECT_DIR$/CS424, Fall 2015, Lab 9_files">
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="JavaScript Debug.lab9.html" />
+        <item itemvalue="Node.js.OrbitControls.js" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="5205fe70-8f21-4739-b963-eadc0490ddbe" name="Default Changelist" comment="" />
+      <created>1587806694394</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1587806694394</updated>
+      <workItem from="1587806695535" duration="151000" />
+      <workItem from="1587806848795" duration="10571000" />
+      <workItem from="1588074874171" duration="9907000" />
+      <workItem from="1588244397894" duration="181000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="1" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="443" y="167" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1588081447193">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state x="443" y="167" key="#com.intellij.fileTypes.FileTypeChooser/0.0.1366.728@0.0.1366.728" timestamp="1588081447193" />
+    <state x="324" y="131" key="#com.intellij.ide.fileTemplates.ui.ConfigureTemplatesDialog" timestamp="1588080613548">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state x="324" y="131" key="#com.intellij.ide.fileTemplates.ui.ConfigureTemplatesDialog/0.0.1366.728@0.0.1366.728" timestamp="1588080613548" />
+    <state x="441" y="235" key="ANALYSIS_DLG_com.intellij.analysis.BaseAnalysisAction$1" timestamp="1588080662068">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state x="441" y="235" key="ANALYSIS_DLG_com.intellij.analysis.BaseAnalysisAction$1/0.0.1366.728@0.0.1366.728" timestamp="1588080662068" />
+    <state x="463" y="119" key="FileChooserDialogImpl" timestamp="1588244577602">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state x="463" y="119" key="FileChooserDialogImpl/0.0.1366.728@0.0.1366.728" timestamp="1588244577602" />
+    <state width="1345" height="179" key="GridCell.Tab.0.bottom" timestamp="1588086174921">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state width="1345" height="179" key="GridCell.Tab.0.bottom/0.0.1366.728@0.0.1366.728" timestamp="1588086174921" />
+    <state width="1345" height="179" key="GridCell.Tab.0.center" timestamp="1588086174920">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state width="1345" height="179" key="GridCell.Tab.0.center/0.0.1366.728@0.0.1366.728" timestamp="1588086174920" />
+    <state width="1345" height="179" key="GridCell.Tab.0.left" timestamp="1588086174920">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state width="1345" height="179" key="GridCell.Tab.0.left/0.0.1366.728@0.0.1366.728" timestamp="1588086174920" />
+    <state width="1345" height="179" key="GridCell.Tab.0.right" timestamp="1588086174921">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state width="1345" height="179" key="GridCell.Tab.0.right/0.0.1366.728@0.0.1366.728" timestamp="1588086174921" />
+    <state x="184" y="6" key="SettingsEditor" timestamp="1588081501525">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state x="184" y="6" key="SettingsEditor/0.0.1366.728@0.0.1366.728" timestamp="1588081501525" />
+    <state width="498" height="446" key="SwitcherDM" timestamp="1588080860894">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state width="498" height="446" key="SwitcherDM/0.0.1366.728@0.0.1366.728" timestamp="1588080860894" />
+  </component>
+</project>
